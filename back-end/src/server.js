@@ -17,3 +17,5 @@ knex.migrate
 function listener() {
   console.log(`Listening on Port ${PORT}!`);
 }
+
+module.exports = app;
