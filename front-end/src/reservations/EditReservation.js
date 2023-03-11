@@ -32,23 +32,18 @@ const EditReservation = ({ loadDashboard }) => {
       validateDate(submittedFormData, foundErrors) &&
       validateFields(submittedFormData, foundErrors)
     ) {
-      if (new Date(submittedFormData.reservation_date).getDay() === 2) {
-        // Tuesday is 2
-        foundErrors.push({ message: "Restaurant is closed on Tuesday." });
-      } else {
-        updateReservation(
-          reservation_id,
-          submittedFormData,
-          abortController.signal
+      updateReservation(
+        reservation_id,
+        submittedFormData,
+        abortController.signal
+      )
+        .then(loadDashboard)
+        .then(() =>
+          history.push(`/dashboard?date=${submittedFormData.reservation_date}`)
         )
-          .then(loadDashboard)
-          .then(() =>
-            history.push(
-              `/dashboard?date=${submittedFormData.reservation_date}`
-            )
-          )
-          .catch(setApiError);
-      }
+        .catch(setApiError);
+    } else {
+      foundErrors.push({ message: "Restaurant is closed on Tuesday." });
     }
     setErrors(foundErrors);
     return () => abortController.abort();
