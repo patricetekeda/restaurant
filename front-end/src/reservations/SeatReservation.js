@@ -3,9 +3,6 @@ import { useHistory, useParams } from "react-router-dom";
 import ErrorAlert from "../layout/ErrorAlert";
 import { listTables, readReservation, seatReservation } from "../utils/api";
 
-
-
-
 export default function SeatReservation({ tables, setTables, loadDashboard }) {
   const history = useHistory();
   const { reservation_id } = useParams();
@@ -14,7 +11,6 @@ export default function SeatReservation({ tables, setTables, loadDashboard }) {
   const [formData, setFormData] = useState(initialState);
   const [reservation, setReservation] = useState([]);
   const [error, setError] = useState(null);
-
 
   useEffect(() => {
     const abortController = new AbortController();
@@ -26,9 +22,7 @@ export default function SeatReservation({ tables, setTables, loadDashboard }) {
     return abortController.abort();
   }, [reservation_id, setTables]);
 
-
   const { first_name, last_name, people } = reservation;
-
 
   let handleSubmit = (event) => {
     event.preventDefault();
@@ -45,15 +39,12 @@ export default function SeatReservation({ tables, setTables, loadDashboard }) {
     return () => abortController.abort();
   };
 
-
-
   const handleChange = ({ target }) => {
     setFormData({
       ...formData,
       [target.name]: target.value,
     });
   };
-
 
   const tableOptionsJSX = () => {
     return tables.map((table) => (
@@ -63,46 +54,44 @@ export default function SeatReservation({ tables, setTables, loadDashboard }) {
     ));
   };
 
-
-
   return (
-    <div className='row justify-content-center'>
-        <form className='col-lg-10' onSubmit={handleSubmit}>
-            <h1 className='text-center py-4'>Seat Reservation</h1>
-            <ErrorAlert error={error} />
+    <div className="row justify-content-center">
+      <form className="col-lg-10" onSubmit={handleSubmit}>
+        <h1 className="text-center py-4">Seat Reservation</h1>
+        <ErrorAlert error={error} />
 
-            <h3 className="text-center py-2">{`${first_name} ${last_name} | Party of ${people}`}</h3>
+        <h3 className="text-center py-2">{`${first_name} ${last_name} | Party of ${people}`}</h3>
 
-            <label className="form-label" htmlFor="table_id">
-                Choose Table:
-            </label>
-            <select
-                className="form-control"
-                name="table_id"
-                id="table_id"
-                onChange={handleChange}
-            >
-                <option value={0}>Choose a table</option>
-                {tableOptionsJSX()}
-            </select>
+        <label className="form-label" htmlFor="table_id">
+          Choose Table:
+        </label>
+        <select
+          className="form-control"
+          name="table_id"
+          id="table_id"
+          onChange={handleChange}
+        >
+          <option value={0}>Choose a table</option>
+          {tableOptionsJSX()}
+        </select>
 
-            <div className='form-group'>
-                <button
-                    className="btn btn-xs btn-dark btn-outline-light my-4 w-10"
-                    type="submit"
-                >
-                    Submit
-                </button>
+        <div className="form-group">
+          <button
+            className="btn btn-xs btn-dark btn-outline-light my-4 w-10"
+            type="submit"
+          >
+            Submit
+          </button>
 
-                <button
-                    className="btn btn-xs btn-cancel text-dark btn-outline-light my-4 mx-2 w-10"
-                    type="button"
-                    onClick={history.goBack}
-                >
-                    Cancel
-                </button>
-            </div>
-        </form>
+          <button
+            className="btn btn-xs btn-cancel text-dark btn-outline-light my-4 mx-2 w-10"
+            type="button"
+            onClick={history.goBack}
+          >
+            Cancel
+          </button>
+        </div>
+      </form>
     </div>
   );
 }

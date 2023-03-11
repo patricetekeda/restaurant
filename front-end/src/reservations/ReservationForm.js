@@ -2,12 +2,9 @@ import React, { useState } from "react";
 import { useHistory } from "react-router-dom";
 import formatPhoneNumber from "../utils/phoneNumberFormatter";
 
-
-
-
 // Displays a Reservation Form used to create or edit a reservation
 const ReservationForm = ({
-  handleSubmit, 
+  handleSubmit,
   initialState = {
     first_name: "",
     last_name: "",
@@ -15,17 +12,12 @@ const ReservationForm = ({
     reservation_date: "",
     reservation_time: "",
     people: "",
-  }
+  },
 }) => {
-  
-  
   const history = useHistory();
-
 
   // Set formData default state to initialState variable
   const [formData, setFormData] = useState(initialState);
-
-
 
   // Updates the state of the form whenever the user makes changes to it
   function handleChange({ target }) {
@@ -34,8 +26,7 @@ const ReservationForm = ({
       [target.name]:
         target.name === "people" ? Number(target.value) : target.value,
     });
-  }  
-
+  }
 
   let phoneNumberFormatter = ({ target }) => {
     const formattedInputValue = formatPhoneNumber(target.value);
@@ -45,23 +36,19 @@ const ReservationForm = ({
     });
   };
 
-
-
-
   return (
-    <div className='row justify-content-center'>
+    <div className="row justify-content-center">
       <form
-        className='col-lg-10'
-        onSubmit={ (e) => {
+        className="col-lg-10"
+        onSubmit={(e) => {
           e.preventDefault();
           handleSubmit(formData);
-        }}>
-
-        
-        <div className='form-group'>
+        }}
+      >
+        <div className="form-group">
           <label>First Name</label>
           <input
-            className='form-control'
+            className="form-control"
             id="first_name"
             name="first_name"
             type="text"
@@ -72,10 +59,10 @@ const ReservationForm = ({
           />
         </div>
 
-        <div className='form-group'>
+        <div className="form-group">
           <label>Last Name</label>
           <input
-            className='form-control'
+            className="form-control"
             id="last_name"
             name="last_name"
             type="text"
@@ -86,10 +73,10 @@ const ReservationForm = ({
           />
         </div>
 
-        <div className='form-group'>
+        <div className="form-group">
           <label>Mobile Number</label>
           <input
-            className='form-control'
+            className="form-control"
             id="mobile_number"
             name="mobile_number"
             type="tel"
@@ -101,10 +88,10 @@ const ReservationForm = ({
           />
         </div>
 
-        <div className='form-group'>
+        <div className="form-group">
           <label>Reservation Date</label>
           <input
-            className='form-control'
+            className="form-control"
             id="reservation_date"
             name="reservation_date"
             type="date"
@@ -115,10 +102,10 @@ const ReservationForm = ({
           />
         </div>
 
-        <div className='form-group'>
+        <div className="form-group">
           <label>Reservation Time</label>
           <input
-            className='form-control'
+            className="form-control"
             id="reservation_time"
             name="reservation_time"
             type="time"
@@ -129,10 +116,10 @@ const ReservationForm = ({
           />
         </div>
 
-        <div className='form-group'>
+        <div className="form-group">
           <label>Party Size</label>
           <input
-            className='form-control'
+            className="form-control"
             id="people"
             name="people"
             type="text"
@@ -143,7 +130,7 @@ const ReservationForm = ({
           />
         </div>
 
-        <div className='form-group'>
+        <div className="form-group">
           <button
             className="btn btn-xs btn-dark btn-outline-light w-10"
             type="submit"
@@ -159,12 +146,9 @@ const ReservationForm = ({
             Cancel
           </button>
         </div>
-
       </form>
     </div>
-  )
-
-}
-
+  );
+};
 
 export default ReservationForm;

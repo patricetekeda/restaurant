@@ -11,8 +11,6 @@ export function validateFields(formData, foundErrors) {
   return foundErrors.length === 0;
 }
 
-
-
 /** checks that the user has entered a date & time that the restaurant is available */
 export function validateDate(formData, foundErrors) {
   const reservationDateTime = new Date(
