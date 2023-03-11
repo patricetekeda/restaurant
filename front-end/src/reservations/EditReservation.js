@@ -27,12 +27,15 @@ const EditReservation = ({ loadDashboard }) => {
   function handleSubmit(submittedFormData) {
     const abortController = new AbortController();
     const foundErrors = [];
-
+    console.log(
+      "current day is ",
+      new Date(submittedFormData.reservation_date).getDay()
+    );
     if (
       validateDate(submittedFormData, foundErrors) &&
       validateFields(submittedFormData, foundErrors)
     ) {
-      if (new Date(submittedFormData.reservation_date).getDay() === 2) {
+      if (new Date(submittedFormData.reservation_date).getDay() === 1) {
         // Tuesday is 2
         foundErrors.push({ message: "Restaurant is closed on Tuesday." });
       } else {
